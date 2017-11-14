@@ -1,0 +1,1 @@
+include "customerapi-rest-api", "customerapi-rest-core", "customerapi-rest-ear", "customerapi-rest-war", "customerapi-rest-ejb", "customerapi-rest-ejb-client"

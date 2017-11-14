@@ -1,0 +1,24 @@
+
+apply plugin: 'ear'
+
+dependencies {
+	deploy project(path: ':customerapi-rest-war', configuration: 'archives')
+	deploy project(path: ':customerapi-rest-ejb')
+	earlib project(':customerapi-rest-core')
+	earlib project(':customerapi-rest-api')
+	earlib project(':customerapi-rest-ejb-client')
+}
+
+ear {
+	deploymentDescriptor {
+		def warName = project(':customerapi-rest-war').name
+		def warVersion = project(':customerapi-rest-war').version
+		def warFileName = warName + '-' + warVersion + '.war'
+		webModule(warFileName, 'customerapi')
+
+		def ejbName = project(':customerapi-rest-ejb').name
+		def ejbVersion = project(':customerapi-rest-ejb').version
+		def ejbFileName = ejbName + '-' + ejbVersion + '.jar'
+		module(ejbFileName, 'ejb')
+	}
+}
